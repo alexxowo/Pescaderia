@@ -14,7 +14,7 @@ using System.IO;
 
 namespace Pescaderia
 {
-    public partial class Inicio_Form : Form
+    public partial class Inicio_Form : Form, Observable
     {
         List<Compra> databaseCompras = Serializer.JSON_Deserialize<Compra>(directories.comprasFile);
         List<Articulos> databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
@@ -22,6 +22,14 @@ namespace Pescaderia
 
         private double totalAPagar = 0;
         private double referenciaDolar = 820000;
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         public Inicio_Form()
         {
@@ -47,19 +55,25 @@ namespace Pescaderia
 
         private void insertData()
         {
-            foreach(Articulos articulo in databaseArticulos){
+            if(cb_articulos.Items.Count > 0)
+            {
+                databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
+                cb_articulos.Items.Clear();
+            }
+
+            foreach (Articulos articulo in databaseArticulos){
                 cb_articulos.Items.Add(articulo.Nombre);
             }
 
             cb_metodo.DataSource = Enum.GetNames(typeof(eTipoPago));
             cb_bank.DataSource = Enum.GetNames(typeof(eBancoPago));
-
         }
 
         private void btn_addItem_Click(object sender, EventArgs e)
         {
             if (num_articulosCantidad.Value > 0)
             {
+                referenciaDolar = (double)numeric_dolar_today.Value;
                 int itemSelected = cb_articulos.SelectedIndex;
                 double precioTotal = databaseArticulos[itemSelected].Precio * (double)num_articulosCantidad.Value;
 
@@ -74,7 +88,7 @@ namespace Pescaderia
                     precioTotal + "$",
                     string.Empty
                 );
-
+                databaseArticulos[itemSelected].cantidad = (double)num_articulosCantidad.Value;
                 articulosCompra.Add(databaseArticulos[itemSelected]);
 
 
@@ -148,6 +162,23 @@ namespace Pescaderia
         private void lb_autor_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_inventory_Click(object sender, EventArgs e)
+        {
+            form_inventory inv = new form_inventory(this);
+            inv.Show();
+        }
+
+        public void update() { insertData(); }
+
+        private void MoveWindow(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }

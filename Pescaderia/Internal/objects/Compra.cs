@@ -25,11 +25,9 @@ namespace Pescaderia.Internal.objects
             get
             {
                 string a = string.Empty;
-
                 for (int i = 0; i > articulosComprados.Count; i++) {
                     a = a +" " + articulosComprados[i].Nombre;
                 }
-
                 return a;
             }
         }
