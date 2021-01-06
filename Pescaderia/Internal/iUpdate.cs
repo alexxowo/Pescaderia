@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Pescaderia.Internal
 {
-    interface Observer
+    public interface iUpdate
     {
+        void Update();
     }
 }
