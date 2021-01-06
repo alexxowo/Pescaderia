@@ -14,7 +14,7 @@ using System.IO;
 
 namespace Pescaderia
 {
-    public partial class Inicio_Form : Form, Observable
+    public partial class Inicio_Form : Form, iUpdate
     {
         List<Compra> databaseCompras = Serializer.JSON_Deserialize<Compra>(directories.comprasFile);
         List<Articulos> databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
@@ -156,7 +156,8 @@ namespace Pescaderia
 
         private void btn_registros_Click(object sender, EventArgs e)
         {
-
+            form_registros formRegistros = new form_registros();
+            formRegistros.Show();
         }
 
         private void lb_autor_Click(object sender, EventArgs e)
@@ -170,7 +171,7 @@ namespace Pescaderia
             inv.Show();
         }
 
-        public void update() { insertData(); }
+        public void Update() { insertData(); }
 
         private void MoveWindow(object sender, MouseEventArgs e)
         {

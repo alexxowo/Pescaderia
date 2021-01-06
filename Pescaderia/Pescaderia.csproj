@@ -52,6 +52,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="form_client_info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_client_info.Designer.cs">
+      <DependentUpon>form_client_info.cs</DependentUpon>
+    </Compile>
     <Compile Include="form_inventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,8 +78,7 @@
     </Compile>
     <Compile Include="Internal\objects\eBancoPago.cs" />
     <Compile Include="Internal\objects\eTipoPago.cs" />
-    <Compile Include="Internal\Observable.cs" />
-    <Compile Include="Internal\Observer.cs" />
+    <Compile Include="Internal\iUpdate.cs" />
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +90,9 @@
     <Compile Include="Internal\objects\Compra.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="form_client_info.resx">
+      <DependentUpon>form_client_info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form_inventory.resx">
       <DependentUpon>form_inventory.cs</DependentUpon>
     </EmbeddedResource>

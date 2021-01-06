@@ -17,9 +17,9 @@ namespace Pescaderia
     public partial class form_inventory : Form
     {
         List<Articulos> database = new List<Articulos>();
-        Observable observable;
+        iUpdate observable;
 
-        public form_inventory(Observable objObservable)
+        public form_inventory(iUpdate objObservable)
         {
             observable = objObservable;
             InitializeComponent();
@@ -80,7 +80,7 @@ namespace Pescaderia
 
                     Serializer.JSON_Serializer<Articulos>(database, directories.productsFile);
                     dataViewerFill();
-                    observable.update();
+                    observable.Update();
                 }
                 else
                 {

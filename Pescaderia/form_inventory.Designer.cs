@@ -339,7 +339,7 @@ namespace Pescaderia
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(44)))), ((int)(((byte)(89)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
             this.ClientSize = new System.Drawing.Size(878, 511);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
