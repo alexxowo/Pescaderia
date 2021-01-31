@@ -52,14 +52,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="form_client_info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_client_info.Designer.cs">
+      <DependentUpon>form_client_info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form_inventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_inventory.Designer.cs">
+      <DependentUpon>form_inventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="form_registros.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form_registros.Designer.cs">
       <DependentUpon>form_registros.cs</DependentUpon>
     </Compile>
+    <Compile Include="form_stats.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_stats.Designer.cs">
+      <DependentUpon>form_stats.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Internal\CalcularDivisas.cs" />
     <Compile Include="Internal\objects\eBancoPago.cs" />
     <Compile Include="Internal\objects\eTipoPago.cs" />
+    <Compile Include="Internal\iUpdate.cs" />
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,8 +91,17 @@
     <Compile Include="Internal\objects\Compra.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="form_client_info.resx">
+      <DependentUpon>form_client_info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_inventory.resx">
+      <DependentUpon>form_inventory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form_registros.resx">
       <DependentUpon>form_registros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_stats.resx">
+      <DependentUpon>form_stats.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>

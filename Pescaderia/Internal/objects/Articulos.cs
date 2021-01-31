@@ -16,6 +16,7 @@ namespace Pescaderia.Internal.objects
             Precio = precio;
         }
 
+        public int id = 0;
         public string Nombre;
         public double Precio;
         public double cantidad;

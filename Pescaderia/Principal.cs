@@ -14,14 +14,27 @@ using System.IO;
 
 namespace Pescaderia
 {
-    public partial class Inicio_Form : Form
+    public partial class Inicio_Form : Form, iUpdate
     {
+        //! Bases de datos locales
         List<Compra> databaseCompras = Serializer.JSON_Deserialize<Compra>(directories.comprasFile);
         List<Articulos> databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
         List<Articulos> articulosCompra = new List<Articulos>();
 
+        //! Pago y Referencia del dolar
         private double totalAPagar = 0;
-        private double referenciaDolar = 820000;
+        private CalcularDivisas calculoDivisa = new CalcularDivisas(0);
+
+        //* variables para mover la ventana
+        #region window_variables
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        
+        #endregion
 
         public Inicio_Form()
         {
@@ -32,8 +45,7 @@ namespace Pescaderia
                 Directory.CreateDirectory(directories.comprasFolder);        
         }
 
-        private void Inicio_Form_Load(object sender, EventArgs e) { }
-
+        //! Controles de la ventana
         #region controls
         private void btn_close_Click(object sender, EventArgs e)
         {
@@ -45,15 +57,43 @@ namespace Pescaderia
             this.WindowState = FormWindowState.Minimized;
         }
 
+        private void btn_registros_Click(object sender, EventArgs e)
+        {
+            form_registros formRegistros = new form_registros();
+            formRegistros.Show();
+        }
+
+        private void btn_inventory_Click(object sender, EventArgs e)
+        {
+            form_inventory inv = new form_inventory(this);
+            inv.Show();
+        }
+
+        //* Mover ventana
+        private void MoveWindow(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        //! Inserta los datos dentro de los campos
         private void insertData()
         {
-            foreach(Articulos articulo in databaseArticulos){
+            if(cb_articulos.Items.Count > 0)
+            {
+                databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
+                cb_articulos.Items.Clear();
+            }
+
+            foreach (Articulos articulo in databaseArticulos){
                 cb_articulos.Items.Add(articulo.Nombre);
             }
 
             cb_metodo.DataSource = Enum.GetNames(typeof(eTipoPago));
             cb_bank.DataSource = Enum.GetNames(typeof(eBancoPago));
-
         }
 
         private void btn_addItem_Click(object sender, EventArgs e)
@@ -63,9 +103,9 @@ namespace Pescaderia
                 int itemSelected = cb_articulos.SelectedIndex;
                 double precioTotal = databaseArticulos[itemSelected].Precio * (double)num_articulosCantidad.Value;
 
-                totalAPagar = totalAPagar + precioTotal;
+                totalAPagar += precioTotal;
                 lb_precioDolar.Text = totalAPagar.ToString()+" $";
-                lb_precioBolivar.Text = (totalAPagar * referenciaDolar).ToString()+" BsS";
+                lb_precioBolivar.Text = calculoDivisa.Calcular(totalAPagar).ToString()+" BsS";
             
                 gridView_items.Rows.Add(
                     databaseArticulos[itemSelected].Nombre,
@@ -74,11 +114,16 @@ namespace Pescaderia
                     precioTotal + "$",
                     string.Empty
                 );
-
+                databaseArticulos[itemSelected].cantidad = (double)num_articulosCantidad.Value;
                 articulosCompra.Add(databaseArticulos[itemSelected]);
 
-
             }
+        }
+
+        private void numeric_dolar_today_ValueChanged(object sender, EventArgs e)
+        {
+            double precioDivisaHoy = (double)numeric_dolar_today.Value;
+            calculoDivisa.precioDivisa = precioDivisaHoy;
         }
 
         #endregion
@@ -87,32 +132,29 @@ namespace Pescaderia
         {
             if (tb_clienteName.Text != string.Empty) {
                 if (articulosCompra.Count > 0) {
-                    Compra nuevaCompra = new Compra();
-                    nuevaCompra.nombreCliente = tb_clienteName.Text; // Nombre cliente
-                    nuevaCompra.telefonoCliente = tb_telefono.Text; // Telefono del cliente Opcional
-                    nuevaCompra.CedulaIdentidad = tb_cedula.Text; // Cedula cliente
-                    nuevaCompra.articulosComprados = articulosCompra; // Articulos que compra
-                    nuevaCompra.fechaCompra = DateTime.Today; // Fecha actual de la compra
-                    nuevaCompra.totalPago = totalAPagar; // pago total en bolivares
-                    nuevaCompra.totalPagoDolar = totalAPagar * referenciaDolar; // pago total en dolares
-                    nuevaCompra.bancoPago = (eBancoPago)cb_bank.SelectedIndex; // banco al que hizo pago
-                    nuevaCompra.tipoPago = (eTipoPago)cb_metodo.SelectedIndex; // metodo de pago
-                    nuevaCompra.ReferenciaPago = tb_referenciaPago.Text; // referencia de pago, Transferencia, pago movil.
+                    string cliente = tb_clienteName.Text; // Nombre cliente
+                    string telefonoCliente = tb_telefono.Text; // Telefono del cliente Opcional
+                    string cedulaCliente = tb_cedula.Text; // Cedula cliente
+                    DateTime fechaCompra = DateTime.Today; // Fecha actual de la compra
+                    double totalPago = totalAPagar; // pago total en bolivares
+                    double totalPagoDolar = calculoDivisa.Calcular(totalAPagar); // pago total en dolares
+                    eBancoPago bancoPago = (eBancoPago)cb_bank.SelectedIndex; // banco al que hizo pago
+                    eTipoPago tipoPago = (eTipoPago)cb_metodo.SelectedIndex; // metodo de pago
+                    string ReferenciaPago = tb_referenciaPago.Text; // referencia de pago, Transferencia, pago movil.
 
+                    // Registrar nueva compra
+                    Compra nuevaCompra = new Compra(cliente, telefonoCliente, cedulaCliente, articulosCompra, fechaCompra, totalPago, totalPagoDolar, ReferenciaPago, tipoPago, bancoPago);
                     databaseCompras.Add(nuevaCompra);
-
-                    MessageBox.Show(nuevaCompra.articulos);
 
                     Serializer.JSON_Serializer(databaseCompras, directories.comprasFile);
 
                     MessageBox.Show("Compra Exitosa!");
-
-                    resetCompra();
+                    resetViewerDeCompras();
                 }
             }
         }
 
-        private void resetCompra()
+        private void resetViewerDeCompras()
         {
             totalAPagar = 0;
             articulosCompra = new List<Articulos>();
@@ -125,7 +167,7 @@ namespace Pescaderia
             cb_bank.SelectedIndex = 0;
             cb_metodo.SelectedIndex = 0;
             lb_precioDolar.Text = totalAPagar.ToString() + "$";
-            lb_precioBolivar.Text = (totalAPagar * referenciaDolar).ToString() + "BsS";
+            lb_precioBolivar.Text = calculoDivisa.Calcular(totalAPagar) + "BsS";
         }
 
         private void cb_metodo_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,14 +182,9 @@ namespace Pescaderia
             }
         }
 
-        private void btn_registros_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lb_autor_Click(object sender, EventArgs e)
-        {
-
+        public void Update() {
+            databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
+            insertData(); 
         }
     }
 }

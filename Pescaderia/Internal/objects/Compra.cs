@@ -16,23 +16,23 @@ namespace Pescaderia.Internal.objects
         public DateTime fechaCompra = DateTime.Now;
         public double totalPago = 0;
         public double totalPagoDolar = 0;
-        public string ReferenciaPago = string.Empty;
+        public string referenciaPago = string.Empty;
         public eTipoPago tipoPago = eTipoPago.Efectivo;
         public eBancoPago bancoPago = eBancoPago.BancoDeVenezuela;
 
-        public string articulos
+        public Compra(string nombreCliente, string telefonoCliente, string cedulaIdentidad, List<Articulos> articulosComprados, DateTime fechaCompra, double totalPago, double totalPagoDivisas, string referenciaPago, eTipoPago tipoPago, eBancoPago bancoPago)
         {
-            get
-            {
-                string a = string.Empty;
+            this.nombreCliente = nombreCliente;
+            this.telefonoCliente = telefonoCliente;
+            this.CedulaIdentidad = cedulaIdentidad;
+            this.articulosComprados = articulosComprados;
+            this.fechaCompra = fechaCompra;
+            this.totalPago = totalPago;
+            this.totalPagoDolar = totalPagoDivisas;
+            this.referenciaPago = referenciaPago;
+            this.tipoPago = tipoPago;
+            this.bancoPago = bancoPago;
 
-                for (int i = 0; i > articulosComprados.Count; i++) {
-                    a = a +" " + articulosComprados[i].Nombre;
-                }
-
-                return a;
-            }
         }
-
     }
 }
