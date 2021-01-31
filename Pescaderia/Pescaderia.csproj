@@ -76,6 +76,7 @@
     <Compile Include="form_stats.Designer.cs">
       <DependentUpon>form_stats.cs</DependentUpon>
     </Compile>
+    <Compile Include="Internal\CalcularDivisas.cs" />
     <Compile Include="Internal\objects\eBancoPago.cs" />
     <Compile Include="Internal\objects\eTipoPago.cs" />
     <Compile Include="Internal\iUpdate.cs" />

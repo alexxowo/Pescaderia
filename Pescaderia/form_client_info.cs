@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Pescaderia.Internal.objects;
 using Pescaderia.Internal;
@@ -32,7 +26,6 @@ namespace Pescaderia
         private double clientPaidDolar;
         //*====================================
 
-
         public form_client_info(int clientId)
         {
             this.clientCompra = compras[clientId];
@@ -49,7 +42,7 @@ namespace Pescaderia
             clientArticles   = clientCompra.articulosComprados;
             clientPaidBank   = clientCompra.bancoPago;
             clientPaidType   = clientCompra.tipoPago;
-            clientPaidRef    = clientCompra.ReferenciaPago;
+            clientPaidRef    = clientCompra.referenciaPago;
             clientPaid       = clientCompra.totalPago;
             clientPaidDolar  = clientCompra.totalPagoDolar;
         }

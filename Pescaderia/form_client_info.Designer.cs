@@ -37,6 +37,10 @@ namespace Pescaderia
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.viewer_articles = new System.Windows.Forms.DataGridView();
+            this.head_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.head_cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.head_precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.head_precioPagar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,10 +57,6 @@ namespace Pescaderia
             this.lb_paid_ref = new System.Windows.Forms.Label();
             this.lb_bank = new System.Windows.Forms.Label();
             this.btn_close = new System.Windows.Forms.Button();
-            this.head_article = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.head_cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.head_precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.head_precioPagar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewer_articles)).BeginInit();
             this.SuspendLayout();
@@ -136,6 +136,34 @@ namespace Pescaderia
             this.viewer_articles.Size = new System.Drawing.Size(497, 266);
             this.viewer_articles.TabIndex = 5;
             // 
+            // head_article
+            // 
+            this.head_article.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.head_article.HeaderText = "Articulo";
+            this.head_article.Name = "head_article";
+            this.head_article.ReadOnly = true;
+            // 
+            // head_cant
+            // 
+            this.head_cant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.head_cant.HeaderText = "Cantidad";
+            this.head_cant.Name = "head_cant";
+            this.head_cant.ReadOnly = true;
+            // 
+            // head_precio
+            // 
+            this.head_precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.head_precio.HeaderText = "Precio";
+            this.head_precio.Name = "head_precio";
+            this.head_precio.ReadOnly = true;
+            // 
+            // head_precioPagar
+            // 
+            this.head_precioPagar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.head_precioPagar.HeaderText = "Precio a Pagar";
+            this.head_precioPagar.Name = "head_precioPagar";
+            this.head_precioPagar.ReadOnly = true;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -205,7 +233,7 @@ namespace Pescaderia
             // lb_total
             // 
             this.lb_total.AutoSize = true;
-            this.lb_total.Location = new System.Drawing.Point(372, 528);
+            this.lb_total.Location = new System.Drawing.Point(373, 550);
             this.lb_total.Name = "lb_total";
             this.lb_total.Size = new System.Drawing.Size(44, 19);
             this.lb_total.TabIndex = 14;
@@ -214,7 +242,7 @@ namespace Pescaderia
             // lb_total_ref
             // 
             this.lb_total_ref.AutoSize = true;
-            this.lb_total_ref.Location = new System.Drawing.Point(372, 548);
+            this.lb_total_ref.Location = new System.Drawing.Point(373, 528);
             this.lb_total_ref.Name = "lb_total_ref";
             this.lb_total_ref.Size = new System.Drawing.Size(44, 19);
             this.lb_total_ref.TabIndex = 15;
@@ -290,34 +318,6 @@ namespace Pescaderia
             this.btn_close.Text = "Cerrar";
             this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
-            // 
-            // head_article
-            // 
-            this.head_article.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.head_article.HeaderText = "Articulo";
-            this.head_article.Name = "head_article";
-            this.head_article.ReadOnly = true;
-            // 
-            // head_cant
-            // 
-            this.head_cant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.head_cant.HeaderText = "Cantidad";
-            this.head_cant.Name = "head_cant";
-            this.head_cant.ReadOnly = true;
-            // 
-            // head_precio
-            // 
-            this.head_precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.head_precio.HeaderText = "Precio";
-            this.head_precio.Name = "head_precio";
-            this.head_precio.ReadOnly = true;
-            // 
-            // head_precioPagar
-            // 
-            this.head_precioPagar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.head_precioPagar.HeaderText = "Precio a Pagar";
-            this.head_precioPagar.Name = "head_precioPagar";
-            this.head_precioPagar.ReadOnly = true;
             // 
             // form_client_info
             // 
