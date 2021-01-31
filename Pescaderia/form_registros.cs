@@ -36,7 +36,7 @@ namespace Pescaderia
                         compra.nombreCliente,
                         compra.totalPago,
                         compra.totalPagoDolar,
-                        compra.ReferenciaPago,
+                        compra.referenciaPago,
                         compra.bancoPago,
                         compra.tipoPago
                     );

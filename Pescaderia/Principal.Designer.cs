@@ -115,6 +115,7 @@
             this.numeric_dolar_today.Size = new System.Drawing.Size(200, 26);
             this.numeric_dolar_today.TabIndex = 39;
             this.numeric_dolar_today.ThousandsSeparator = true;
+            this.numeric_dolar_today.ValueChanged += new System.EventHandler(this.numeric_dolar_today_ValueChanged);
             // 
             // lb_dolar
             // 
@@ -217,7 +218,6 @@
             this.lb_autor.Size = new System.Drawing.Size(92, 14);
             this.lb_autor.TabIndex = 6;
             this.lb_autor.Text = "Design by Alexx";
-            this.lb_autor.Click += new System.EventHandler(this.lb_autor_Click);
             // 
             // lb_title
             // 
@@ -228,6 +228,7 @@
             this.lb_title.Size = new System.Drawing.Size(255, 33);
             this.lb_title.TabIndex = 1;
             this.lb_title.Text = "Pescaderia Lolymar";
+            this.lb_title.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveWindow);
             // 
             // btn_close
             // 
@@ -549,7 +550,6 @@
             this.MaximizeBox = false;
             this.Name = "Inicio_Form";
             this.Text = "INICIO";
-            this.Load += new System.EventHandler(this.Inicio_Form_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_dolar_today)).EndInit();
