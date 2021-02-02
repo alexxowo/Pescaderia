@@ -76,10 +76,12 @@
     <Compile Include="form_stats.Designer.cs">
       <DependentUpon>form_stats.cs</DependentUpon>
     </Compile>
-    <Compile Include="Internal\CalcularDivisas.cs" />
+    <Compile Include="Internal\CalculateReference.cs" />
     <Compile Include="Internal\objects\eBancoPago.cs" />
     <Compile Include="Internal\objects\eTipoPago.cs" />
-    <Compile Include="Internal\iUpdate.cs" />
+    <Compile Include="Internal\Observable.cs" />
+    <Compile Include="Internal\objects\OptionsViewer.cs" />
+    <Compile Include="Internal\Observer.cs" />
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +137,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Barra lateral.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

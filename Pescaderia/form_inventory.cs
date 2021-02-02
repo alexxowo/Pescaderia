@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Pescaderia.Internal.objects;
 using Pescaderia.Internal;
@@ -14,24 +8,24 @@ using ToolsCripto_Alexx;
 
 namespace Pescaderia
 {
-    public partial class form_inventory : Form
+    public partial class form_inventory : Form, Observer
     {
-        List<Articulos> database = new List<Articulos>();
-        iUpdate observable;
+        private List<Articulos> database = new List<Articulos>();
+        private Observable observable;
 
-        public form_inventory(iUpdate objObservable)
+        public form_inventory(Observable FormObservable)
         {
-            observable = objObservable;
+            observable = FormObservable;
             InitializeComponent();
         }
 
-        private void form_inventory_Load(object sender, EventArgs e)
+        private void FormInventoryLoad(object sender, EventArgs e)
         {
             Init();
-            dataViewerFill();
+            ArticlesDataBaseViewer();
         }
 
-        private void dataViewerFill()
+        private void ArticlesDataBaseViewer()
         {
             if (dataview_database.Rows.Count > 0)
                 dataview_database.Rows.Clear();
@@ -59,9 +53,8 @@ namespace Pescaderia
                 Directory.CreateDirectory(directories.productsFolder);
         }
 
-        private void btn_add_article_Click(object sender, EventArgs e)
+        private void AddArticle(object sender, EventArgs e)
         {
-
             if(tb_title.Text != string.Empty)
             {
                 if(numeric_stock.Value > 0)
@@ -79,8 +72,8 @@ namespace Pescaderia
                     database.Add(article);
 
                     Serializer.JSON_Serializer<Articulos>(database, directories.productsFile);
-                    dataViewerFill();
-                    observable.Update();
+                    ArticlesDataBaseViewer();
+                    NotifyChanges();
                 }
                 else
                 {
@@ -91,37 +84,40 @@ namespace Pescaderia
             {
                 MessageBox.Show("No haz puesto nombre al articulo.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-
         }
 
-        private void dataview_database_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void SelectArticleCell(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedIndex = dataview_database.CurrentCell.RowIndex;
+            int ArticleSelectedIndex = dataview_database.CurrentCell.RowIndex;
             tb_edit_art_title.Enabled = true;
             numeric_edit_price.Enabled = true;
             numeric_edit_stock.Enabled = true;
             btn_edit.Enabled = true;
 
-            string articleName = database[selectedIndex].Nombre;
-            double articlePrice = database[selectedIndex].Precio;
-            float articleStock = database[selectedIndex].articulosStock;
+            string articleName = database[ArticleSelectedIndex].Nombre;
+            double articlePrice = database[ArticleSelectedIndex].Precio;
+            float articleStock = database[ArticleSelectedIndex].articulosStock;
 
             tb_edit_art_title.Text = articleName;
             numeric_edit_price.Value = (decimal)articlePrice;
             numeric_stock.Value = (decimal)articleStock;
         }
 
-        private void btn_edit_Click(object sender, EventArgs e)
+        private void EditSelectedArticle(object sender, EventArgs e)
         {
-            int selectedIndex = dataview_database.CurrentCell.RowIndex;
+            int articleSelectedIndex = dataview_database.CurrentCell.RowIndex;
 
-            database[selectedIndex].Nombre = tb_edit_art_title.Text;
-            database[selectedIndex].Precio = (double)numeric_edit_price.Value;
-            database[selectedIndex].articulosStock = (float)numeric_edit_stock.Value;
+            database[articleSelectedIndex].Nombre = tb_edit_art_title.Text;
+            database[articleSelectedIndex].Precio = (double)numeric_edit_price.Value;
+            database[articleSelectedIndex].articulosStock = (float)numeric_edit_stock.Value;
 
             Serializer.JSON_Serializer<Articulos>(database, directories.productsFile);
-            dataViewerFill();
+            ArticlesDataBaseViewer();
+        }
+
+        public void NotifyChanges()
+        {
+            observable.Update();
         }
     }
 }

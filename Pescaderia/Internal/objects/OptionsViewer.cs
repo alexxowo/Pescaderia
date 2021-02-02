@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pescaderia.Internal
+namespace Pescaderia.Internal.objects
 {
-    public interface iUpdate
+    public enum OptionsViewer
     {
-        void Update();
+        Todos = 0,
+        Fecha = 1,
     }
 }

@@ -133,7 +133,7 @@ namespace Pescaderia
             this.dataview_database.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataview_database.Size = new System.Drawing.Size(416, 409);
             this.dataview_database.TabIndex = 0;
-            this.dataview_database.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataview_database_CellClick);
+            this.dataview_database.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectArticleCell);
             // 
             // header_id
             // 
@@ -196,7 +196,7 @@ namespace Pescaderia
             this.btn_add_article.TabIndex = 6;
             this.btn_add_article.Text = "Añadir";
             this.btn_add_article.UseVisualStyleBackColor = false;
-            this.btn_add_article.Click += new System.EventHandler(this.btn_add_article_Click);
+            this.btn_add_article.Click += new System.EventHandler(this.AddArticle);
             // 
             // lb_article_stock
             // 
@@ -278,7 +278,7 @@ namespace Pescaderia
             this.btn_edit.TabIndex = 6;
             this.btn_edit.Text = "Modificar";
             this.btn_edit.UseVisualStyleBackColor = false;
-            this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
+            this.btn_edit.Click += new System.EventHandler(this.EditSelectedArticle);
             // 
             // label2
             // 
@@ -352,7 +352,7 @@ namespace Pescaderia
             this.Name = "form_inventory";
             this.ShowIcon = false;
             this.Text = "Pescaderia Lolymar / Inventario";
-            this.Load += new System.EventHandler(this.form_inventory_Load);
+            this.Load += new System.EventHandler(this.FormInventoryLoad);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

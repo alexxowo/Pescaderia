@@ -73,6 +73,7 @@
             this.cb_articulos = new System.Windows.Forms.ComboBox();
             this.btn_addItem = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_dolar_today)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_items)).BeginInit();
@@ -96,7 +97,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(215, 426);
+            this.panel1.Size = new System.Drawing.Size(232, 426);
             this.panel1.TabIndex = 0;
             // 
             // numeric_dolar_today
@@ -115,12 +116,12 @@
             this.numeric_dolar_today.Size = new System.Drawing.Size(200, 26);
             this.numeric_dolar_today.TabIndex = 39;
             this.numeric_dolar_today.ThousandsSeparator = true;
-            this.numeric_dolar_today.ValueChanged += new System.EventHandler(this.numeric_dolar_today_ValueChanged);
+            this.numeric_dolar_today.ValueChanged += new System.EventHandler(this.SetReferencePrice);
             // 
             // lb_dolar
             // 
             this.lb_dolar.AutoSize = true;
-            this.lb_dolar.Location = new System.Drawing.Point(13, 199);
+            this.lb_dolar.Location = new System.Drawing.Point(12, 199);
             this.lb_dolar.Name = "lb_dolar";
             this.lb_dolar.Size = new System.Drawing.Size(106, 23);
             this.lb_dolar.TabIndex = 40;
@@ -132,11 +133,11 @@
             this.btn_registros.ForeColor = System.Drawing.Color.White;
             this.btn_registros.Location = new System.Drawing.Point(0, 372);
             this.btn_registros.Name = "btn_registros";
-            this.btn_registros.Size = new System.Drawing.Size(215, 42);
+            this.btn_registros.Size = new System.Drawing.Size(232, 42);
             this.btn_registros.TabIndex = 20;
             this.btn_registros.Text = "Registros";
             this.btn_registros.UseVisualStyleBackColor = true;
-            this.btn_registros.Click += new System.EventHandler(this.btn_registros_Click);
+            this.btn_registros.Click += new System.EventHandler(this.OpenRegistersFrom);
             // 
             // btn_stats
             // 
@@ -144,7 +145,7 @@
             this.btn_stats.ForeColor = System.Drawing.Color.White;
             this.btn_stats.Location = new System.Drawing.Point(0, 317);
             this.btn_stats.Name = "btn_stats";
-            this.btn_stats.Size = new System.Drawing.Size(215, 42);
+            this.btn_stats.Size = new System.Drawing.Size(232, 42);
             this.btn_stats.TabIndex = 4;
             this.btn_stats.Text = "Estadisticas";
             this.btn_stats.UseVisualStyleBackColor = true;
@@ -155,17 +156,17 @@
             this.btn_inventory.ForeColor = System.Drawing.Color.White;
             this.btn_inventory.Location = new System.Drawing.Point(0, 258);
             this.btn_inventory.Name = "btn_inventory";
-            this.btn_inventory.Size = new System.Drawing.Size(215, 42);
+            this.btn_inventory.Size = new System.Drawing.Size(232, 42);
             this.btn_inventory.TabIndex = 3;
             this.btn_inventory.Text = "Inventario";
             this.btn_inventory.UseVisualStyleBackColor = true;
-            this.btn_inventory.Click += new System.EventHandler(this.btn_inventory_Click);
+            this.btn_inventory.Click += new System.EventHandler(this.OpenInventoryForm);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 35);
+            this.label1.Location = new System.Drawing.Point(0, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(166, 25);
             this.label1.TabIndex = 15;
@@ -174,7 +175,7 @@
             // lb_precioBolivar
             // 
             this.lb_precioBolivar.AutoSize = true;
-            this.lb_precioBolivar.Location = new System.Drawing.Point(65, 74);
+            this.lb_precioBolivar.Location = new System.Drawing.Point(53, 74);
             this.lb_precioBolivar.Name = "lb_precioBolivar";
             this.lb_precioBolivar.Size = new System.Drawing.Size(55, 23);
             this.lb_precioBolivar.TabIndex = 19;
@@ -184,7 +185,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(16, 74);
+            this.label2.Location = new System.Drawing.Point(4, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 23);
             this.label2.TabIndex = 16;
@@ -193,7 +194,7 @@
             // lb_precioDolar
             // 
             this.lb_precioDolar.AutoSize = true;
-            this.lb_precioDolar.Location = new System.Drawing.Point(65, 100);
+            this.lb_precioDolar.Location = new System.Drawing.Point(53, 100);
             this.lb_precioDolar.Name = "lb_precioDolar";
             this.lb_precioDolar.Size = new System.Drawing.Size(32, 23);
             this.lb_precioDolar.TabIndex = 18;
@@ -203,7 +204,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(16, 100);
+            this.label3.Location = new System.Drawing.Point(4, 100);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 23);
             this.label3.TabIndex = 17;
@@ -213,7 +214,7 @@
             // 
             this.lb_autor.AutoSize = true;
             this.lb_autor.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_autor.Location = new System.Drawing.Point(941, 445);
+            this.lb_autor.Location = new System.Drawing.Point(238, 451);
             this.lb_autor.Name = "lb_autor";
             this.lb_autor.Size = new System.Drawing.Size(92, 14);
             this.lb_autor.TabIndex = 6;
@@ -243,7 +244,7 @@
             this.btn_close.TabIndex = 3;
             this.btn_close.Text = "X";
             this.btn_close.UseVisualStyleBackColor = false;
-            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
+            this.btn_close.Click += new System.EventHandler(this.CloseWindow);
             // 
             // btn_minimize
             // 
@@ -258,11 +259,11 @@
             this.btn_minimize.TabIndex = 4;
             this.btn_minimize.Text = "_";
             this.btn_minimize.UseVisualStyleBackColor = false;
-            this.btn_minimize.Click += new System.EventHandler(this.btn_minimize_Click);
+            this.btn_minimize.Click += new System.EventHandler(this.Minimize);
             // 
             // tb_clienteName
             // 
-            this.tb_clienteName.Location = new System.Drawing.Point(239, 341);
+            this.tb_clienteName.Location = new System.Drawing.Point(256, 341);
             this.tb_clienteName.Name = "tb_clienteName";
             this.tb_clienteName.Size = new System.Drawing.Size(213, 30);
             this.tb_clienteName.TabIndex = 9;
@@ -271,7 +272,7 @@
             // 
             this.lb_clienteName.AutoSize = true;
             this.lb_clienteName.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_clienteName.Location = new System.Drawing.Point(235, 313);
+            this.lb_clienteName.Location = new System.Drawing.Point(252, 313);
             this.lb_clienteName.Name = "lb_clienteName";
             this.lb_clienteName.Size = new System.Drawing.Size(141, 23);
             this.lb_clienteName.TabIndex = 10;
@@ -281,7 +282,7 @@
             // 
             this.lb_cedulaIdentidad.AutoSize = true;
             this.lb_cedulaIdentidad.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_cedulaIdentidad.Location = new System.Drawing.Point(454, 313);
+            this.lb_cedulaIdentidad.Location = new System.Drawing.Point(471, 313);
             this.lb_cedulaIdentidad.Name = "lb_cedulaIdentidad";
             this.lb_cedulaIdentidad.Size = new System.Drawing.Size(74, 23);
             this.lb_cedulaIdentidad.TabIndex = 12;
@@ -289,7 +290,7 @@
             // 
             // tb_cedula
             // 
-            this.tb_cedula.Location = new System.Drawing.Point(458, 341);
+            this.tb_cedula.Location = new System.Drawing.Point(475, 341);
             this.tb_cedula.Name = "tb_cedula";
             this.tb_cedula.Size = new System.Drawing.Size(143, 30);
             this.tb_cedula.TabIndex = 11;
@@ -298,7 +299,7 @@
             // 
             this.lb_telefono.AutoSize = true;
             this.lb_telefono.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_telefono.Location = new System.Drawing.Point(603, 312);
+            this.lb_telefono.Location = new System.Drawing.Point(620, 312);
             this.lb_telefono.Name = "lb_telefono";
             this.lb_telefono.Size = new System.Drawing.Size(85, 23);
             this.lb_telefono.TabIndex = 14;
@@ -306,7 +307,7 @@
             // 
             // tb_telefono
             // 
-            this.tb_telefono.Location = new System.Drawing.Point(607, 341);
+            this.tb_telefono.Location = new System.Drawing.Point(624, 341);
             this.tb_telefono.Name = "tb_telefono";
             this.tb_telefono.Size = new System.Drawing.Size(143, 30);
             this.tb_telefono.TabIndex = 13;
@@ -316,27 +317,27 @@
             this.btn_register.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_register.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_register.ForeColor = System.Drawing.Color.White;
-            this.btn_register.Location = new System.Drawing.Point(616, 402);
+            this.btn_register.Location = new System.Drawing.Point(633, 402);
             this.btn_register.Name = "btn_register";
             this.btn_register.Size = new System.Drawing.Size(215, 31);
             this.btn_register.TabIndex = 7;
             this.btn_register.Text = "Registrar Pago";
             this.btn_register.UseVisualStyleBackColor = false;
-            this.btn_register.Click += new System.EventHandler(this.btn_register_Click);
+            this.btn_register.Click += new System.EventHandler(this.RegisterPurchase);
             // 
             // cb_metodo
             // 
             this.cb_metodo.FormattingEnabled = true;
-            this.cb_metodo.Location = new System.Drawing.Point(239, 402);
+            this.cb_metodo.Location = new System.Drawing.Point(256, 402);
             this.cb_metodo.Name = "cb_metodo";
             this.cb_metodo.Size = new System.Drawing.Size(154, 31);
             this.cb_metodo.TabIndex = 20;
-            this.cb_metodo.SelectedIndexChanged += new System.EventHandler(this.cb_metodo_SelectedIndexChanged);
+            this.cb_metodo.SelectedIndexChanged += new System.EventHandler(this.SelectPaidMethod);
             // 
             // cb_bank
             // 
             this.cb_bank.FormattingEnabled = true;
-            this.cb_bank.Location = new System.Drawing.Point(399, 402);
+            this.cb_bank.Location = new System.Drawing.Point(416, 402);
             this.cb_bank.Name = "cb_bank";
             this.cb_bank.Size = new System.Drawing.Size(201, 31);
             this.cb_bank.TabIndex = 21;
@@ -344,7 +345,7 @@
             // lb_tipoPago
             // 
             this.lb_tipoPago.AutoSize = true;
-            this.lb_tipoPago.Location = new System.Drawing.Point(239, 377);
+            this.lb_tipoPago.Location = new System.Drawing.Point(256, 377);
             this.lb_tipoPago.Name = "lb_tipoPago";
             this.lb_tipoPago.Size = new System.Drawing.Size(125, 23);
             this.lb_tipoPago.TabIndex = 22;
@@ -353,7 +354,7 @@
             // lb_bancoPago
             // 
             this.lb_bancoPago.AutoSize = true;
-            this.lb_bancoPago.Location = new System.Drawing.Point(395, 376);
+            this.lb_bancoPago.Location = new System.Drawing.Point(412, 376);
             this.lb_bancoPago.Name = "lb_bancoPago";
             this.lb_bancoPago.Size = new System.Drawing.Size(64, 23);
             this.lb_bancoPago.TabIndex = 23;
@@ -361,7 +362,7 @@
             // 
             // tb_referenciaPago
             // 
-            this.tb_referenciaPago.Location = new System.Drawing.Point(756, 341);
+            this.tb_referenciaPago.Location = new System.Drawing.Point(773, 341);
             this.tb_referenciaPago.Name = "tb_referenciaPago";
             this.tb_referenciaPago.Size = new System.Drawing.Size(143, 30);
             this.tb_referenciaPago.TabIndex = 24;
@@ -370,7 +371,7 @@
             // 
             this.lb_ref.AutoSize = true;
             this.lb_ref.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_ref.Location = new System.Drawing.Point(752, 313);
+            this.lb_ref.Location = new System.Drawing.Point(769, 313);
             this.lb_ref.Name = "lb_ref";
             this.lb_ref.Size = new System.Drawing.Size(101, 23);
             this.lb_ref.TabIndex = 25;
@@ -392,7 +393,7 @@
             this.header_PrecioTotal,
             this.header_tipo});
             this.gridView_items.GridColor = System.Drawing.Color.Snow;
-            this.gridView_items.Location = new System.Drawing.Point(239, 113);
+            this.gridView_items.Location = new System.Drawing.Point(256, 113);
             this.gridView_items.MultiSelect = false;
             this.gridView_items.Name = "gridView_items";
             this.gridView_items.ReadOnly = true;
@@ -456,7 +457,7 @@
             this.button1.BackColor = System.Drawing.Color.RoyalBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(711, 74);
+            this.button1.Location = new System.Drawing.Point(728, 74);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(81, 31);
             this.button1.TabIndex = 37;
@@ -466,7 +467,7 @@
             // num_articulosCantidad
             // 
             this.num_articulosCantidad.DecimalPlaces = 3;
-            this.num_articulosCantidad.Location = new System.Drawing.Point(458, 76);
+            this.num_articulosCantidad.Location = new System.Drawing.Point(475, 76);
             this.num_articulosCantidad.Name = "num_articulosCantidad";
             this.num_articulosCantidad.Size = new System.Drawing.Size(87, 30);
             this.num_articulosCantidad.TabIndex = 36;
@@ -475,7 +476,7 @@
             // 
             this.lb_productoLabel.AutoSize = true;
             this.lb_productoLabel.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_productoLabel.Location = new System.Drawing.Point(235, 50);
+            this.lb_productoLabel.Location = new System.Drawing.Point(252, 50);
             this.lb_productoLabel.Name = "lb_productoLabel";
             this.lb_productoLabel.Size = new System.Drawing.Size(89, 23);
             this.lb_productoLabel.TabIndex = 35;
@@ -484,7 +485,7 @@
             // cb_articulos
             // 
             this.cb_articulos.FormattingEnabled = true;
-            this.cb_articulos.Location = new System.Drawing.Point(239, 76);
+            this.cb_articulos.Location = new System.Drawing.Point(256, 76);
             this.cb_articulos.Name = "cb_articulos";
             this.cb_articulos.Size = new System.Drawing.Size(213, 31);
             this.cb_articulos.TabIndex = 34;
@@ -494,13 +495,13 @@
             this.btn_addItem.BackColor = System.Drawing.Color.Crimson;
             this.btn_addItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addItem.ForeColor = System.Drawing.Color.White;
-            this.btn_addItem.Location = new System.Drawing.Point(551, 74);
+            this.btn_addItem.Location = new System.Drawing.Point(568, 74);
             this.btn_addItem.Name = "btn_addItem";
             this.btn_addItem.Size = new System.Drawing.Size(154, 31);
             this.btn_addItem.TabIndex = 33;
             this.btn_addItem.Text = "Añadir a cesta";
             this.btn_addItem.UseVisualStyleBackColor = false;
-            this.btn_addItem.Click += new System.EventHandler(this.btn_addItem_Click);
+            this.btn_addItem.Click += new System.EventHandler(this.AddArticleToPurchase);
             // 
             // panel2
             // 
@@ -515,11 +516,25 @@
             this.panel2.TabIndex = 38;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveWindow);
             // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::Pescaderia.Properties.Resources.settings;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.Color.Transparent;
+            this.button2.Location = new System.Drawing.Point(1007, 429);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(36, 36);
+            this.button2.TabIndex = 5;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Inicio_Form
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(23)))), ((int)(((byte)(47)))));
             this.ClientSize = new System.Drawing.Size(1043, 465);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.num_articulosCantidad);
             this.Controls.Add(this.lb_productoLabel);
@@ -604,6 +619,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lb_dolar;
         private System.Windows.Forms.NumericUpDown numeric_dolar_today;
+        private System.Windows.Forms.Button button2;
     }
 }
 
