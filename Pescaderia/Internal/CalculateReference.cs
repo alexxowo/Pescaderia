@@ -17,5 +17,9 @@
         {
             return referencePrice * _referencePrice;
         }
+        public override string ToString()
+        {
+            return "El precio de la divisa es: " + _referencePrice.ToString();
+        }
     }
 }

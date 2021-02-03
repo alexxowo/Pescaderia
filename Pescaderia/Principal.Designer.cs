@@ -67,7 +67,7 @@
             this.header_precioUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.header_PrecioTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.header_tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.deleteBtn = new System.Windows.Forms.Button();
             this.num_articulosCantidad = new System.Windows.Forms.NumericUpDown();
             this.lb_productoLabel = new System.Windows.Forms.Label();
             this.cb_articulos = new System.Windows.Forms.ComboBox();
@@ -141,6 +141,7 @@
             // 
             // btn_stats
             // 
+            this.btn_stats.Enabled = false;
             this.btn_stats.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_stats.ForeColor = System.Drawing.Color.White;
             this.btn_stats.Location = new System.Drawing.Point(0, 317);
@@ -452,17 +453,18 @@
             this.header_tipo.Name = "header_tipo";
             this.header_tipo.ReadOnly = true;
             // 
-            // button1
+            // deleteBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(728, 74);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 31);
-            this.button1.TabIndex = 37;
-            this.button1.Text = "Quitar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.deleteBtn.BackColor = System.Drawing.Color.RoyalBlue;
+            this.deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteBtn.ForeColor = System.Drawing.Color.White;
+            this.deleteBtn.Location = new System.Drawing.Point(728, 74);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(81, 31);
+            this.deleteBtn.TabIndex = 37;
+            this.deleteBtn.Text = "Quitar";
+            this.deleteBtn.UseVisualStyleBackColor = false;
+            this.deleteBtn.Click += new System.EventHandler(this.DeleteSelectedArticlePurchase);
             // 
             // num_articulosCantidad
             // 
@@ -535,7 +537,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(23)))), ((int)(((byte)(47)))));
             this.ClientSize = new System.Drawing.Size(1043, 465);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.num_articulosCantidad);
             this.Controls.Add(this.lb_productoLabel);
             this.Controls.Add(this.cb_articulos);
@@ -565,6 +567,7 @@
             this.MaximizeBox = false;
             this.Name = "Inicio_Form";
             this.Text = "INICIO";
+            this.Load += new System.EventHandler(this.Inicio_Form_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_dolar_today)).EndInit();
@@ -610,7 +613,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn header_precioUnit;
         private System.Windows.Forms.DataGridViewTextBoxColumn header_PrecioTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn header_tipo;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.NumericUpDown num_articulosCantidad;
         private System.Windows.Forms.Label lb_productoLabel;
         private System.Windows.Forms.ComboBox cb_articulos;

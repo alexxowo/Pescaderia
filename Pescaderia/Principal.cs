@@ -140,7 +140,19 @@ namespace Pescaderia
                     string ReferenciaPago = tb_referenciaPago.Text; // referencia de pago, Transferencia, pago movil.
 
                     // Registrar nueva compra
-                    Compra nuevaCompra = new Compra(cliente, telefonoCliente, cedulaCliente, articulosCompra, fechaCompra, totalPago, totalPagoDolar, ReferenciaPago, tipoPago, bancoPago);
+                    Compra nuevaCompra = new Compra(
+                        cliente,
+                        telefonoCliente,
+                        cedulaCliente,
+                        articulosCompra,
+                        fechaCompra,
+                        totalPago,
+                        totalPagoDolar,
+                        ReferenciaPago,
+                        tipoPago,
+                        bancoPago
+                    );
+
                     databaseCompras.Add(nuevaCompra);
 
                     Serializer.JSON_Serializer(databaseCompras, directories.comprasFile);
@@ -183,6 +195,22 @@ namespace Pescaderia
         public new void Update() {
             databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
             InsertDataInGUI(); 
+        }
+
+        private void DeleteSelectedArticlePurchase(object sender, EventArgs e)
+        {
+            int selectedArticleIndex = gridView_items.CurrentCell.RowIndex;
+            DialogResult Result = MessageBox.Show("Estas seguro que quieres eliminar el articulo seleccionado?", "Advertencia", MessageBoxButtons.YesNo);
+            if (Result == DialogResult.Yes)
+            {
+                articulosCompra.RemoveAt(selectedArticleIndex);
+                gridView_items.Rows.RemoveAt(selectedArticleIndex);
+            }
+        }
+
+        private void Inicio_Form_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
