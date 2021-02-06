@@ -133,41 +133,49 @@ namespace Pescaderia
         // Registrar pago
         private void RegisterPurchase(object sender, EventArgs e)
         {
-            if (tb_clienteName.Text != string.Empty) {
-                if (articulosCompra.Count > 0) {
-                    string cliente = tb_clienteName.Text; // Nombre cliente
-                    string telefonoCliente = tb_telefono.Text; // Telefono del cliente Opcional
-                    string cedulaCliente = tb_cedula.Text; // Cedula cliente
-                    DateTime fechaCompra = DateTime.Today; // Fecha actual de la compra
-                    double totalPago = totalAPagar; // pago total en bolivares
-                    double totalPagoDolar = calculoDivisa.Calcular(totalAPagar); // pago total en dolares
-                    eBancoPago bancoPago = (eBancoPago)cb_bank.SelectedIndex; // banco al que hizo pago
-                    eTipoPago tipoPago = (eTipoPago)cb_metodo.SelectedIndex; // metodo de pago
-                    string ReferenciaPago = tb_referenciaPago.Text; // referencia de pago, Transferencia, pago movil.
-                    bool pagoPendiente = pagoPendienteCheck.Checked;
-                    // Registrar nueva compra
-                    Compra nuevaCompra = new Compra(
-                        cliente,
-                        telefonoCliente,
-                        cedulaCliente,
-                        articulosCompra,
-                        fechaCompra,
-                        totalPago,
-                        totalPagoDolar,
-                        ReferenciaPago,
-                        tipoPago,
-                        bancoPago,
-                        pagoPendiente
-                    );
+            if(numeric_dolar_today.Value != 0)
+            {
+                if (tb_clienteName.Text != string.Empty)
+                {
+                    if (articulosCompra.Count > 0)
+                    {
+                        string cliente = tb_clienteName.Text; // Nombre cliente
+                        string telefonoCliente = tb_telefono.Text; // Telefono del cliente Opcional
+                        string cedulaCliente = tb_cedula.Text; // Cedula cliente
+                        DateTime fechaCompra = DateTime.Today; // Fecha actual de la compra
+                        double totalPago = totalAPagar; // pago total en bolivares
+                        double totalPagoDolar = calculoDivisa.Calcular(totalAPagar); // pago total en dolares
+                        eBancoPago bancoPago = (eBancoPago)cb_bank.SelectedIndex; // banco al que hizo pago
+                        eTipoPago tipoPago = (eTipoPago)cb_metodo.SelectedIndex; // metodo de pago
+                        string ReferenciaPago = tb_referenciaPago.Text; // referencia de pago, Transferencia, pago movil.
+                        bool pagoPendiente = pagoPendienteCheck.Checked;
+                        // Registrar nueva compra
+                        Compra nuevaCompra = new Compra(
+                            cliente,
+                            telefonoCliente,
+                            cedulaCliente,
+                            articulosCompra,
+                            fechaCompra,
+                            totalPago,
+                            totalPagoDolar,
+                            ReferenciaPago,
+                            tipoPago,
+                            bancoPago,
+                            pagoPendiente
+                        );
 
-                    databaseCompras.Add(nuevaCompra);
+                        databaseCompras.Add(nuevaCompra);
 
-                    Serializer.JSON_Serializer(databaseCompras, directories.comprasFile);
+                        Serializer.JSON_Serializer(databaseCompras, directories.comprasFile);
 
-                    MessageBox.Show("Compra Exitosa!");
-                    ResetPurchaseFields();
+                        MessageBox.Show("Compra Exitosa!");
+                        ResetPurchaseFields();
+                    }
+                    else { MessageBox.Show("No hay articulos para la compra", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
                 }
+                else { MessageBox.Show("No se ha establecido un nombre de cliente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             }
+            else { MessageBox.Show("No se ha establecido un precio del dolar", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
 
         private void ResetPurchaseFields()

@@ -29,11 +29,11 @@ namespace Pescaderia
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -60,6 +60,8 @@ namespace Pescaderia
             this.numeric_edit_price = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.tb_edit_art_title = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.deleteArticleBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataview_database)).BeginInit();
@@ -69,6 +71,7 @@ namespace Pescaderia
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_edit_stock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_edit_price)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -109,14 +112,14 @@ namespace Pescaderia
             this.dataview_database.AllowUserToAddRows = false;
             this.dataview_database.AllowUserToDeleteRows = false;
             this.dataview_database.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataview_database.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataview_database.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataview_database.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataview_database.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.header_id,
@@ -129,8 +132,8 @@ namespace Pescaderia
             this.dataview_database.ReadOnly = true;
             this.dataview_database.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dataview_database.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            this.dataview_database.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            this.dataview_database.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataview_database.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataview_database.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataview_database.Size = new System.Drawing.Size(416, 409);
@@ -147,8 +150,8 @@ namespace Pescaderia
             // header_article
             // 
             this.header_article.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.header_article.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.header_article.DefaultCellStyle = dataGridViewCellStyle7;
             this.header_article.HeaderText = "Articulo";
             this.header_article.Name = "header_article";
             this.header_article.ReadOnly = true;
@@ -156,8 +159,8 @@ namespace Pescaderia
             // header_price
             // 
             this.header_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            this.header_price.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            this.header_price.DefaultCellStyle = dataGridViewCellStyle8;
             this.header_price.HeaderText = "Precio";
             this.header_price.Name = "header_price";
             this.header_price.ReadOnly = true;
@@ -165,8 +168,8 @@ namespace Pescaderia
             // header_stock
             // 
             this.header_stock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.header_stock.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            this.header_stock.DefaultCellStyle = dataGridViewCellStyle9;
             this.header_stock.HeaderText = "Stock";
             this.header_stock.Name = "header_stock";
             this.header_stock.ReadOnly = true;
@@ -190,11 +193,11 @@ namespace Pescaderia
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Añadir Articulos";
             // 
-            // ProductType
+            // productTypeComboBox
             // 
             this.productTypeComboBox.FormattingEnabled = true;
             this.productTypeComboBox.Location = new System.Drawing.Point(6, 111);
-            this.productTypeComboBox.Name = "ProductType";
+            this.productTypeComboBox.Name = "productTypeComboBox";
             this.productTypeComboBox.Size = new System.Drawing.Size(201, 27);
             this.productTypeComboBox.TabIndex = 8;
             // 
@@ -356,12 +359,38 @@ namespace Pescaderia
             this.tb_edit_art_title.Size = new System.Drawing.Size(201, 27);
             this.tb_edit_art_title.TabIndex = 0;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.deleteArticleBtn);
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
+            this.groupBox4.Location = new System.Drawing.Point(448, 358);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(417, 73);
+            this.groupBox4.TabIndex = 8;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Eliminar Articulo";
+            // 
+            // deleteArticleBtn
+            // 
+            this.deleteArticleBtn.BackColor = System.Drawing.Color.Crimson;
+            this.deleteArticleBtn.Enabled = false;
+            this.deleteArticleBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteArticleBtn.ForeColor = System.Drawing.Color.White;
+            this.deleteArticleBtn.Location = new System.Drawing.Point(8, 21);
+            this.deleteArticleBtn.Name = "deleteArticleBtn";
+            this.deleteArticleBtn.Size = new System.Drawing.Size(399, 46);
+            this.deleteArticleBtn.TabIndex = 0;
+            this.deleteArticleBtn.Text = "Eliminar Articulo";
+            this.deleteArticleBtn.UseVisualStyleBackColor = false;
+            this.deleteArticleBtn.Click += new System.EventHandler(this.DeleteArticle);
+            // 
             // form_inventory
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
             this.ClientSize = new System.Drawing.Size(878, 511);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -386,6 +415,7 @@ namespace Pescaderia
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_edit_stock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_edit_price)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -418,5 +448,7 @@ namespace Pescaderia
         private System.Windows.Forms.DataGridViewTextBoxColumn header_stock;
         private System.Windows.Forms.ComboBox productTypeComboBox;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button deleteArticleBtn;
     }
 }

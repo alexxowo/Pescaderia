@@ -95,19 +95,20 @@ namespace Pescaderia
 
         private void SelectArticleCell(object sender, DataGridViewCellEventArgs e)
         {
-            int ArticleSelectedIndex = dataview_database.CurrentCell.RowIndex;
-            tb_edit_art_title.Enabled = true;
+            int ArticleSelectedIndex   = dataview_database.CurrentCell.RowIndex;
+            tb_edit_art_title.Enabled  = true;
             numeric_edit_price.Enabled = true;
             numeric_edit_stock.Enabled = true;
-            btn_edit.Enabled = true;
+            btn_edit.Enabled           = true;
+            deleteArticleBtn.Enabled   = true;
 
-            string articleName = database[ArticleSelectedIndex].nombre;
+            string articleName  = database[ArticleSelectedIndex].nombre;
             double articlePrice = database[ArticleSelectedIndex].precio;
-            float articleStock = database[ArticleSelectedIndex].articulosStock;
+            float articleStock  = database[ArticleSelectedIndex].articulosStock;
 
-            tb_edit_art_title.Text = articleName;
+            tb_edit_art_title.Text   = articleName;
             numeric_edit_price.Value = (decimal)articlePrice;
-            numeric_stock.Value = (decimal)articleStock;
+            numeric_stock.Value      = (decimal)articleStock;
         }
 
         private void EditSelectedArticle(object sender, EventArgs e)
@@ -125,6 +126,22 @@ namespace Pescaderia
         public void NotifyChanges()
         {
             observable.Update();
+        }
+
+        private void DeleteArticle(object sender, EventArgs e)
+        {
+            int articleSelectedIndex = dataview_database.CurrentCell.RowIndex;
+            DialogResult resultDialog = MessageBox.Show("Desea eliminar el articulo seleccionado?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            
+            if(resultDialog == DialogResult.Yes)
+            {
+                database.RemoveAt(articleSelectedIndex);
+                dataview_database.Rows.RemoveAt(articleSelectedIndex);
+                Serializer.JSON_Serializer(database, directories.productsFile);
+                ArticlesDataBaseViewer();
+                observable.Update();
+            }
+
         }
     }
 }
