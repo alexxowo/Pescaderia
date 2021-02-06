@@ -31,13 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.viewer_clients = new System.Windows.Forms.DataGridView();
-            this.h_clienteName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.h_totalPaidBs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.h_totalPaidDolar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.h_reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.h_bank = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.h_tipoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.header_datetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lb_registrosTitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -45,6 +38,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.options_view = new System.Windows.Forms.ComboBox();
             this.btn_view_details = new System.Windows.Forms.Button();
+            this.h_clienteName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h_totalPaidBs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h_totalPaidDolar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h_reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h_bank = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h_tipoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.header_datetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pagoPendienteHeader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.viewer_clients)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -70,7 +71,8 @@
             this.h_reference,
             this.h_bank,
             this.h_tipoPago,
-            this.header_datetime});
+            this.header_datetime,
+            this.pagoPendienteHeader});
             this.viewer_clients.Location = new System.Drawing.Point(6, 48);
             this.viewer_clients.Name = "viewer_clients";
             this.viewer_clients.ReadOnly = true;
@@ -79,55 +81,6 @@
             this.viewer_clients.Size = new System.Drawing.Size(900, 302);
             this.viewer_clients.TabIndex = 0;
             this.viewer_clients.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SelectClientCell);
-            // 
-            // h_clienteName
-            // 
-            this.h_clienteName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.h_clienteName.HeaderText = "Cliente";
-            this.h_clienteName.Name = "h_clienteName";
-            this.h_clienteName.ReadOnly = true;
-            // 
-            // h_totalPaidBs
-            // 
-            this.h_totalPaidBs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.h_totalPaidBs.HeaderText = "Pago BsS";
-            this.h_totalPaidBs.Name = "h_totalPaidBs";
-            this.h_totalPaidBs.ReadOnly = true;
-            // 
-            // h_totalPaidDolar
-            // 
-            this.h_totalPaidDolar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.h_totalPaidDolar.HeaderText = "Total Dolar";
-            this.h_totalPaidDolar.Name = "h_totalPaidDolar";
-            this.h_totalPaidDolar.ReadOnly = true;
-            // 
-            // h_reference
-            // 
-            this.h_reference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.h_reference.HeaderText = "Referencia";
-            this.h_reference.Name = "h_reference";
-            this.h_reference.ReadOnly = true;
-            // 
-            // h_bank
-            // 
-            this.h_bank.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.h_bank.HeaderText = "Banco";
-            this.h_bank.Name = "h_bank";
-            this.h_bank.ReadOnly = true;
-            // 
-            // h_tipoPago
-            // 
-            this.h_tipoPago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.h_tipoPago.HeaderText = "Metodo pago";
-            this.h_tipoPago.Name = "h_tipoPago";
-            this.h_tipoPago.ReadOnly = true;
-            // 
-            // header_datetime
-            // 
-            this.header_datetime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.header_datetime.HeaderText = "Fecha";
-            this.header_datetime.Name = "header_datetime";
-            this.header_datetime.ReadOnly = true;
             // 
             // lb_registrosTitle
             // 
@@ -207,6 +160,62 @@
             this.btn_view_details.UseVisualStyleBackColor = false;
             this.btn_view_details.Click += new System.EventHandler(this.OpenClientDetailsForm);
             // 
+            // h_clienteName
+            // 
+            this.h_clienteName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.h_clienteName.HeaderText = "Cliente";
+            this.h_clienteName.Name = "h_clienteName";
+            this.h_clienteName.ReadOnly = true;
+            // 
+            // h_totalPaidBs
+            // 
+            this.h_totalPaidBs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.h_totalPaidBs.HeaderText = "Pago BsS";
+            this.h_totalPaidBs.Name = "h_totalPaidBs";
+            this.h_totalPaidBs.ReadOnly = true;
+            // 
+            // h_totalPaidDolar
+            // 
+            this.h_totalPaidDolar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.h_totalPaidDolar.HeaderText = "Total Dolar";
+            this.h_totalPaidDolar.Name = "h_totalPaidDolar";
+            this.h_totalPaidDolar.ReadOnly = true;
+            // 
+            // h_reference
+            // 
+            this.h_reference.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.h_reference.HeaderText = "Referencia";
+            this.h_reference.Name = "h_reference";
+            this.h_reference.ReadOnly = true;
+            // 
+            // h_bank
+            // 
+            this.h_bank.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.h_bank.HeaderText = "Banco";
+            this.h_bank.Name = "h_bank";
+            this.h_bank.ReadOnly = true;
+            // 
+            // h_tipoPago
+            // 
+            this.h_tipoPago.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.h_tipoPago.HeaderText = "Metodo pago";
+            this.h_tipoPago.Name = "h_tipoPago";
+            this.h_tipoPago.ReadOnly = true;
+            // 
+            // header_datetime
+            // 
+            this.header_datetime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.header_datetime.HeaderText = "Fecha";
+            this.header_datetime.Name = "header_datetime";
+            this.header_datetime.ReadOnly = true;
+            // 
+            // pagoPendienteHeader
+            // 
+            this.pagoPendienteHeader.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.pagoPendienteHeader.HeaderText = "Pendiente";
+            this.pagoPendienteHeader.Name = "pagoPendienteHeader";
+            this.pagoPendienteHeader.ReadOnly = true;
+            // 
             // form_registros
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -240,6 +249,7 @@
         private System.Windows.Forms.Button btn_view_details;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox options_view;
+        private System.Windows.Forms.DateTimePicker dateTimePurchase;
         private System.Windows.Forms.DataGridViewTextBoxColumn h_clienteName;
         private System.Windows.Forms.DataGridViewTextBoxColumn h_totalPaidBs;
         private System.Windows.Forms.DataGridViewTextBoxColumn h_totalPaidDolar;
@@ -247,6 +257,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn h_bank;
         private System.Windows.Forms.DataGridViewTextBoxColumn h_tipoPago;
         private System.Windows.Forms.DataGridViewTextBoxColumn header_datetime;
-        private System.Windows.Forms.DateTimePicker dateTimePurchase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pagoPendienteHeader;
     }
 }

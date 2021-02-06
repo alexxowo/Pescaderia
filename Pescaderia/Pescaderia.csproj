@@ -77,8 +77,9 @@
       <DependentUpon>form_stats.cs</DependentUpon>
     </Compile>
     <Compile Include="Internal\CalculateReference.cs" />
-    <Compile Include="Internal\objects\eBancoPago.cs" />
-    <Compile Include="Internal\objects\eTipoPago.cs" />
+    <Compile Include="Internal\objects\Compras\eBancoPago.cs" />
+    <Compile Include="Internal\objects\Compras\eTipoPago.cs" />
+    <Compile Include="Internal\objects\Productos\TipoProducto.cs" />
     <Compile Include="Internal\Observable.cs" />
     <Compile Include="Internal\objects\OptionsViewer.cs" />
     <Compile Include="Internal\Observer.cs" />
@@ -89,8 +90,8 @@
       <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
     <Compile Include="Internal\directories.cs" />
-    <Compile Include="Internal\objects\Articulos.cs" />
-    <Compile Include="Internal\objects\Compra.cs" />
+    <Compile Include="Internal\objects\Productos\Producto.cs" />
+    <Compile Include="Internal\objects\Compras\Compra.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="form_client_info.resx">

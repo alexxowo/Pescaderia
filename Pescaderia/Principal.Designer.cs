@@ -74,6 +74,7 @@
             this.btn_addItem = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.pagoPendienteCheck = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_dolar_today)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_items)).BeginInit();
@@ -97,7 +98,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(232, 426);
+            this.panel1.Size = new System.Drawing.Size(232, 436);
             this.panel1.TabIndex = 0;
             // 
             // numeric_dolar_today
@@ -318,7 +319,7 @@
             this.btn_register.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_register.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_register.ForeColor = System.Drawing.Color.White;
-            this.btn_register.Location = new System.Drawing.Point(633, 402);
+            this.btn_register.Location = new System.Drawing.Point(773, 400);
             this.btn_register.Name = "btn_register";
             this.btn_register.Size = new System.Drawing.Size(215, 31);
             this.btn_register.TabIndex = 7;
@@ -365,7 +366,7 @@
             // 
             this.tb_referenciaPago.Location = new System.Drawing.Point(773, 341);
             this.tb_referenciaPago.Name = "tb_referenciaPago";
-            this.tb_referenciaPago.Size = new System.Drawing.Size(143, 30);
+            this.tb_referenciaPago.Size = new System.Drawing.Size(215, 30);
             this.tb_referenciaPago.TabIndex = 24;
             // 
             // lb_ref
@@ -525,17 +526,28 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(1007, 429);
+            this.button2.Location = new System.Drawing.Point(1007, 439);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(36, 36);
             this.button2.TabIndex = 5;
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // pagoPendienteCheck
+            // 
+            this.pagoPendienteCheck.AutoSize = true;
+            this.pagoPendienteCheck.Location = new System.Drawing.Point(624, 406);
+            this.pagoPendienteCheck.Name = "pagoPendienteCheck";
+            this.pagoPendienteCheck.Size = new System.Drawing.Size(115, 27);
+            this.pagoPendienteCheck.TabIndex = 39;
+            this.pagoPendienteCheck.Text = "Pendiente";
+            this.pagoPendienteCheck.UseVisualStyleBackColor = true;
+            // 
             // Inicio_Form
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(23)))), ((int)(((byte)(47)))));
-            this.ClientSize = new System.Drawing.Size(1043, 465);
+            this.ClientSize = new System.Drawing.Size(1043, 475);
+            this.Controls.Add(this.pagoPendienteCheck);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.num_articulosCantidad);
@@ -623,6 +635,7 @@
         private System.Windows.Forms.Label lb_dolar;
         private System.Windows.Forms.NumericUpDown numeric_dolar_today;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox pagoPendienteCheck;
     }
 }
 

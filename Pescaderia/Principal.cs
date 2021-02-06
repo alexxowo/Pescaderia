@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Pescaderia.Internal;
-using Pescaderia.Internal.objects;
+using Pescaderia.Internal.objects.Compras;
+using Pescaderia.Internal.objects.Productos;
 using ToolsCripto_Alexx;
 using System.IO;
 
@@ -13,8 +14,8 @@ namespace Pescaderia
     {
         //! Bases de datos locales
         List<Compra> databaseCompras = Serializer.JSON_Deserialize<Compra>(directories.comprasFile);
-        List<Articulos> databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
-        List<Articulos> articulosCompra = new List<Articulos>();
+        List<Producto> databaseArticulos = Serializer.JSON_Deserialize<Producto>(directories.productsFile);
+        List<Producto> articulosCompra = new List<Producto>();
 
         //! Pago y Referencia del dolar
         private double totalAPagar = 0;
@@ -80,12 +81,12 @@ namespace Pescaderia
         {
             if(cb_articulos.Items.Count > 0)
             {
-                databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
+                databaseArticulos = Serializer.JSON_Deserialize<Producto>(directories.productsFile);
                 cb_articulos.Items.Clear();
             }
 
-            foreach (Articulos articulo in databaseArticulos){
-                cb_articulos.Items.Add(articulo.Nombre);
+            foreach (Producto articulo in databaseArticulos){
+                cb_articulos.Items.Add(articulo.nombre);
             }
 
             cb_metodo.DataSource = Enum.GetNames(typeof(eTipoPago));
@@ -98,6 +99,12 @@ namespace Pescaderia
             calculoDivisa.precioDivisa = precioDivisaHoy;
         }
 
+        private void UpdateLabels()
+        {
+            lb_precioDolar.Text = totalAPagar.ToString() + " $";
+            lb_precioBolivar.Text = calculoDivisa.Calcular(totalAPagar).ToString() + " BsS";
+        }
+
         #endregion
 
         private void AddArticleToPurchase(object sender, EventArgs e)
@@ -105,16 +112,15 @@ namespace Pescaderia
             if (num_articulosCantidad.Value > 0)
             {
                 int itemSelected = cb_articulos.SelectedIndex;
-                double precioTotal = databaseArticulos[itemSelected].Precio * (double)num_articulosCantidad.Value;
-
+                double precioTotal = databaseArticulos[itemSelected].precio * (double)num_articulosCantidad.Value;
                 totalAPagar += precioTotal;
-                lb_precioDolar.Text = totalAPagar.ToString() + " $";
-                lb_precioBolivar.Text = calculoDivisa.Calcular(totalAPagar).ToString() + " BsS";
+
+                UpdateLabels();
 
                 gridView_items.Rows.Add(
-                    databaseArticulos[itemSelected].Nombre,
+                    databaseArticulos[itemSelected].nombre,
                     (double)num_articulosCantidad.Value,
-                    databaseArticulos[itemSelected].Precio.ToString() + "$",
+                    databaseArticulos[itemSelected].precio.ToString() + "$",
                     precioTotal + "$",
                     string.Empty
                 );
@@ -138,7 +144,7 @@ namespace Pescaderia
                     eBancoPago bancoPago = (eBancoPago)cb_bank.SelectedIndex; // banco al que hizo pago
                     eTipoPago tipoPago = (eTipoPago)cb_metodo.SelectedIndex; // metodo de pago
                     string ReferenciaPago = tb_referenciaPago.Text; // referencia de pago, Transferencia, pago movil.
-
+                    bool pagoPendiente = pagoPendienteCheck.Checked;
                     // Registrar nueva compra
                     Compra nuevaCompra = new Compra(
                         cliente,
@@ -150,7 +156,8 @@ namespace Pescaderia
                         totalPagoDolar,
                         ReferenciaPago,
                         tipoPago,
-                        bancoPago
+                        bancoPago,
+                        pagoPendiente
                     );
 
                     databaseCompras.Add(nuevaCompra);
@@ -166,7 +173,7 @@ namespace Pescaderia
         private void ResetPurchaseFields()
         {
             totalAPagar = 0;
-            articulosCompra = new List<Articulos>();
+            articulosCompra = new List<Producto>();
             gridView_items.Rows.Clear();
 
             tb_clienteName.Text = string.Empty;
@@ -193,7 +200,7 @@ namespace Pescaderia
 
         //! Update GUI When this function is called by other form
         public new void Update() {
-            databaseArticulos = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
+            databaseArticulos = Serializer.JSON_Deserialize<Producto>(directories.productsFile);
             InsertDataInGUI(); 
         }
 
@@ -203,6 +210,8 @@ namespace Pescaderia
             DialogResult Result = MessageBox.Show("Estas seguro que quieres eliminar el articulo seleccionado?", "Advertencia", MessageBoxButtons.YesNo);
             if (Result == DialogResult.Yes)
             {
+                totalAPagar -= articulosCompra[selectedArticleIndex].precio * articulosCompra[selectedArticleIndex].cantidad;
+                UpdateLabels();
                 articulosCompra.RemoveAt(selectedArticleIndex);
                 gridView_items.Rows.RemoveAt(selectedArticleIndex);
             }

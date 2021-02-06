@@ -43,6 +43,8 @@ namespace Pescaderia
             this.header_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.header_stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.productTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.btn_add_article = new System.Windows.Forms.Button();
             this.lb_article_stock = new System.Windows.Forms.Label();
             this.numeric_stock = new System.Windows.Forms.NumericUpDown();
@@ -171,6 +173,8 @@ namespace Pescaderia
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.productTypeComboBox);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.btn_add_article);
             this.groupBox2.Controls.Add(this.lb_article_stock);
             this.groupBox2.Controls.Add(this.numeric_stock);
@@ -181,18 +185,35 @@ namespace Pescaderia
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.groupBox2.Location = new System.Drawing.Point(450, 52);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(416, 134);
+            this.groupBox2.Size = new System.Drawing.Size(416, 154);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Añadir Articulos";
+            // 
+            // ProductType
+            // 
+            this.productTypeComboBox.FormattingEnabled = true;
+            this.productTypeComboBox.Location = new System.Drawing.Point(6, 111);
+            this.productTypeComboBox.Name = "ProductType";
+            this.productTypeComboBox.Size = new System.Drawing.Size(201, 27);
+            this.productTypeComboBox.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 89);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(135, 19);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Tipo de Producto:";
             // 
             // btn_add_article
             // 
             this.btn_add_article.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(63)))), ((int)(((byte)(91)))));
             this.btn_add_article.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_add_article.Location = new System.Drawing.Point(6, 89);
+            this.btn_add_article.Location = new System.Drawing.Point(213, 111);
             this.btn_add_article.Name = "btn_add_article";
-            this.btn_add_article.Size = new System.Drawing.Size(395, 34);
+            this.btn_add_article.Size = new System.Drawing.Size(197, 29);
             this.btn_add_article.TabIndex = 6;
             this.btn_add_article.Text = "Añadir";
             this.btn_add_article.UseVisualStyleBackColor = false;
@@ -260,7 +281,7 @@ namespace Pescaderia
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.tb_edit_art_title);
             this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.groupBox3.Location = new System.Drawing.Point(450, 192);
+            this.groupBox3.Location = new System.Drawing.Point(450, 212);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(416, 134);
             this.groupBox3.TabIndex = 7;
@@ -395,5 +416,7 @@ namespace Pescaderia
         private System.Windows.Forms.DataGridViewTextBoxColumn header_article;
         private System.Windows.Forms.DataGridViewTextBoxColumn header_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn header_stock;
+        private System.Windows.Forms.ComboBox productTypeComboBox;
+        private System.Windows.Forms.Label label5;
     }
 }

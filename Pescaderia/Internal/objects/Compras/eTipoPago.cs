@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pescaderia.Internal.objects
+namespace Pescaderia.Internal.objects.Compras
 {
     public enum eTipoPago
     {

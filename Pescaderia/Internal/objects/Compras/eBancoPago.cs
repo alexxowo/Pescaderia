@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pescaderia.Internal.objects
+namespace Pescaderia.Internal.objects.Compras
 {
     public enum eBancoPago
     {
         BancoDeVenezuela = 0,
         Banesco = 1,
-        BancoOccidentalDeDescuento = 2,
+        BOD = 2,
         Mercantil = 3,
         BancoNacionalDeCredito = 4
     }

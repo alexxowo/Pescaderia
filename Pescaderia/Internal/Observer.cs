@@ -1,6 +1,6 @@
 ﻿namespace Pescaderia.Internal
 {
-    interface Observer
+    public interface Observer
     {
         void NotifyChanges();
     }

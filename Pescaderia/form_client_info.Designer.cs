@@ -57,6 +57,7 @@ namespace Pescaderia
             this.lb_paid_ref = new System.Windows.Forms.Label();
             this.lb_bank = new System.Windows.Forms.Label();
             this.btn_close = new System.Windows.Forms.Button();
+            this.check_pagoPendiente = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewer_articles)).BeginInit();
             this.SuspendLayout();
@@ -319,11 +320,24 @@ namespace Pescaderia
             this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
+            // check_pagoPendiente
+            // 
+            this.check_pagoPendiente.AutoSize = true;
+            this.check_pagoPendiente.ForeColor = System.Drawing.Color.Crimson;
+            this.check_pagoPendiente.Location = new System.Drawing.Point(335, 572);
+            this.check_pagoPendiente.Name = "check_pagoPendiente";
+            this.check_pagoPendiente.Size = new System.Drawing.Size(96, 23);
+            this.check_pagoPendiente.TabIndex = 24;
+            this.check_pagoPendiente.Text = "checkBox1";
+            this.check_pagoPendiente.UseVisualStyleBackColor = true;
+            this.check_pagoPendiente.CheckedChanged += new System.EventHandler(this.ChangePaidState);
+            // 
             // form_client_info
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
             this.ClientSize = new System.Drawing.Size(543, 631);
+            this.Controls.Add(this.check_pagoPendiente);
             this.Controls.Add(this.btn_close);
             this.Controls.Add(this.lb_bank);
             this.Controls.Add(this.lb_paid_ref);
@@ -390,5 +404,6 @@ namespace Pescaderia
         private System.Windows.Forms.DataGridViewTextBoxColumn head_cant;
         private System.Windows.Forms.DataGridViewTextBoxColumn head_precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn head_precioPagar;
+        private System.Windows.Forms.CheckBox check_pagoPendiente;
     }
 }

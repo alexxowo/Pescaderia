@@ -4,12 +4,13 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using Pescaderia.Internal.objects;
+using Pescaderia.Internal.objects.Compras;
 using Pescaderia.Internal;
 using ToolsCripto_Alexx;
 
 namespace Pescaderia
 {
-    public partial class form_registros : Form
+    public partial class form_registros : Form, Observable
     {
         List<Compra> comprasDatabase = Serializer.JSON_Deserialize<Compra>(directories.comprasFile);
         private int selectedClientIndex = 0;
@@ -29,7 +30,7 @@ namespace Pescaderia
 
         private void OpenClientDetailsForm(object sender, EventArgs e)
         {
-            form_client_info formClientInfo = new form_client_info(selectedClientIndex);
+            form_client_info formClientInfo = new form_client_info(selectedClientIndex, this);
             formClientInfo.Show();
         }
 
@@ -66,14 +67,15 @@ namespace Pescaderia
             {
                 foreach (Compra OrdenedPurchases in purchases.Where(purchase => purchase.fechaCompra.ToString("dd/MM/yyyy") == purchaseDatetime.ToString("dd/MM/yyyy")))
                 {
-                    viewer_clients.Rows.Add(
+                    AddIntoViewerValues(
                         OrdenedPurchases.nombreCliente,
-                        OrdenedPurchases.totalPago,
                         OrdenedPurchases.totalPagoDolar,
+                        OrdenedPurchases.totalPago,
                         OrdenedPurchases.referenciaPago,
                         OrdenedPurchases.bancoPago,
                         OrdenedPurchases.tipoPago,
-                        OrdenedPurchases.fechaCompra.ToString("dd/MM/yyyy")
+                        OrdenedPurchases.fechaCompra,
+                        OrdenedPurchases.pagoPendiente
                     );
                 }
             }
@@ -87,18 +89,34 @@ namespace Pescaderia
             {
                 foreach (Compra compra in Purchases)
                 {
-                    viewer_clients.Rows.Add(
+                    AddIntoViewerValues(
                         compra.nombreCliente,
                         compra.totalPagoDolar,
                         compra.totalPago,
                         compra.referenciaPago,
                         compra.bancoPago,
                         compra.tipoPago,
-                        compra.fechaCompra.ToString("dd/MM/yyyy")
-                    );
+                        compra.fechaCompra,
+                        compra.pagoPendiente
+                    ); ;
                 }
             }
         }
+
+        private void AddIntoViewerValues(string nombreCliente, double totalPagoDivisa, double totalPagoBolivares, string referenciaPago, eBancoPago banco, eTipoPago tipoPago, DateTime fecha, bool pagoPendiente)
+        {
+            viewer_clients.Rows.Add(
+                nombreCliente,
+                totalPagoDivisa,
+                totalPagoBolivares,
+                referenciaPago,
+                banco,
+                tipoPago,
+                fecha.ToString("dd/MM/yyyy"),
+                (pagoPendiente) ? "Pendiente" : "Pagado"
+            );
+        }
+
 
         private void ClearRegistrersViewer()
         {
@@ -109,6 +127,19 @@ namespace Pescaderia
         private void ChooseDateTimeToSearch(object sender, EventArgs e)
         {
             SearchRegisterByDateTime(comprasDatabase, dateTimePurchase.Value);
+        }
+
+        public void Update()
+        {
+            comprasDatabase = Serializer.JSON_Deserialize<Compra>(directories.comprasFile);
+            if ((OptionsViewer)options_view.SelectedIndex == OptionsViewer.Fecha)
+            {
+                SearchRegisterByDateTime(comprasDatabase, dateTimePurchase.Value);
+            }
+            if ((OptionsViewer)options_view.SelectedIndex == OptionsViewer.Todos)
+            {
+                UpdateRegistersViewer(comprasDatabase);
+            }
         }
     }
 }

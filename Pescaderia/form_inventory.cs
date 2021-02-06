@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Pescaderia.Internal.objects;
+using Pescaderia.Internal.objects.Productos;
 using Pescaderia.Internal;
 using System.IO;
 using ToolsCripto_Alexx;
@@ -10,7 +10,7 @@ namespace Pescaderia
 {
     public partial class form_inventory : Form, Observer
     {
-        private List<Articulos> database = new List<Articulos>();
+        private List<Producto> database = new List<Producto>();
         private Observable observable;
 
         public form_inventory(Observable FormObservable)
@@ -36,8 +36,8 @@ namespace Pescaderia
                 {
                     dataview_database.Rows.Add(
                         database[i].id,
-                        database[i].Nombre,
-                        database[i].Precio,
+                        database[i].nombre,
+                        database[i].precio,
                         database[i].articulosStock
                     );
                 }
@@ -47,10 +47,13 @@ namespace Pescaderia
         private void Init()
         {
             if (File.Exists(directories.productsFile)) 
-                database = Serializer.JSON_Deserialize<Articulos>(directories.productsFile);
+                database = Serializer.JSON_Deserialize<Producto>(directories.productsFile);
 
             if (!Directory.Exists(directories.productsFolder))
                 Directory.CreateDirectory(directories.productsFolder);
+
+            // Add items to combobox
+            productTypeComboBox.DataSource = Enum.GetValues(typeof(TipoProducto));
         }
 
         private void AddArticle(object sender, EventArgs e)
@@ -59,19 +62,23 @@ namespace Pescaderia
             {
                 if(numeric_stock.Value > 0)
                 {
+                    int articleId = database.Count + 1;
                     string articleName = tb_title.Text;
                     double articlePrice = (double)numeric_price.Value;
                     float articleStock = (float)numeric_stock.Value;
+                    TipoProducto articleType = (TipoProducto)productTypeComboBox.SelectedIndex;
 
-                    Articulos article = new Articulos();
-                    article.Nombre = articleName;
-                    article.Precio = articlePrice;
-                    article.articulosStock = articleStock;
-                    article.id = database.Count + 1;
+                    Producto article = new Producto(
+                        articleId,
+                        articleName,
+                        articleType,
+                        articlePrice,
+                        articleStock
+                    );
 
                     database.Add(article);
 
-                    Serializer.JSON_Serializer<Articulos>(database, directories.productsFile);
+                    Serializer.JSON_Serializer<Producto>(database, directories.productsFile);
                     ArticlesDataBaseViewer();
                     NotifyChanges();
                 }
@@ -94,8 +101,8 @@ namespace Pescaderia
             numeric_edit_stock.Enabled = true;
             btn_edit.Enabled = true;
 
-            string articleName = database[ArticleSelectedIndex].Nombre;
-            double articlePrice = database[ArticleSelectedIndex].Precio;
+            string articleName = database[ArticleSelectedIndex].nombre;
+            double articlePrice = database[ArticleSelectedIndex].precio;
             float articleStock = database[ArticleSelectedIndex].articulosStock;
 
             tb_edit_art_title.Text = articleName;
@@ -107,11 +114,11 @@ namespace Pescaderia
         {
             int articleSelectedIndex = dataview_database.CurrentCell.RowIndex;
 
-            database[articleSelectedIndex].Nombre = tb_edit_art_title.Text;
-            database[articleSelectedIndex].Precio = (double)numeric_edit_price.Value;
+            database[articleSelectedIndex].nombre = tb_edit_art_title.Text;
+            database[articleSelectedIndex].precio = (double)numeric_edit_price.Value;
             database[articleSelectedIndex].articulosStock = (float)numeric_edit_stock.Value;
 
-            Serializer.JSON_Serializer<Articulos>(database, directories.productsFile);
+            Serializer.JSON_Serializer<Producto>(database, directories.productsFile);
             ArticlesDataBaseViewer();
         }
 

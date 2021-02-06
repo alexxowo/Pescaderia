@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Pescaderia.Internal.objects.Productos;
 
-namespace Pescaderia.Internal.objects
+namespace Pescaderia.Internal.objects.Compras
 {
     [Serializable]
     public class Compra
@@ -12,15 +13,16 @@ namespace Pescaderia.Internal.objects
         public string nombreCliente = string.Empty;
         public string telefonoCliente = string.Empty;
         public string CedulaIdentidad = string.Empty;
-        public List<Articulos> articulosComprados = new List<Articulos>();
+        public List<Producto> articulosComprados = new List<Producto>();
         public DateTime fechaCompra = DateTime.Now;
         public double totalPago = 0;
         public double totalPagoDolar = 0;
         public string referenciaPago = string.Empty;
         public eTipoPago tipoPago = eTipoPago.Efectivo;
         public eBancoPago bancoPago = eBancoPago.BancoDeVenezuela;
+        public bool pagoPendiente = false;
 
-        public Compra(string nombreCliente, string telefonoCliente, string cedulaIdentidad, List<Articulos> articulosComprados, DateTime fechaCompra, double totalPago, double totalPagoDivisas, string referenciaPago, eTipoPago tipoPago, eBancoPago bancoPago)
+        public Compra(string nombreCliente, string telefonoCliente, string cedulaIdentidad, List<Producto> articulosComprados, DateTime fechaCompra, double totalPago, double totalPagoDivisas, string referenciaPago, eTipoPago tipoPago, eBancoPago bancoPago, bool pagoPendiente)
         {
             this.nombreCliente = nombreCliente;
             this.telefonoCliente = telefonoCliente;
@@ -32,7 +34,7 @@ namespace Pescaderia.Internal.objects
             this.referenciaPago = referenciaPago;
             this.tipoPago = tipoPago;
             this.bancoPago = bancoPago;
-
+            this.pagoPendiente = pagoPendiente;
         }
     }
 }
